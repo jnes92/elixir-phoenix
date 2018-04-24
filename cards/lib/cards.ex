@@ -1,18 +1,7 @@
 defmodule Cards do
-  @moduledoc """
-  Documentation for Cards.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Cards.hello
-      :world
-
-  """
   def hello do
-    :world
+    "hi there."
+    # implicit return : 
+    # last used value inside method is returned
   end
 end
