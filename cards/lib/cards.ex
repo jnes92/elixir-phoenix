@@ -5,4 +5,8 @@ defmodule Cards do
   def create_deck do
     ["Ace","Two","Three"] # double quotes, single quotes is support, but not common
   end
+
+  def shuffle(deck) do
+      Enum.shuffle(deck)
+  end
 end
