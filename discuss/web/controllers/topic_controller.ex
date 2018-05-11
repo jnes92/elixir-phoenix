@@ -3,7 +3,7 @@ defmodule Discuss.TopicController do
 
   alias Discuss.Topic
 
-  def index(conn,_params) do
+  def index(conn, _params) do
     topics = Repo.all(Topic)
     render(conn, "index.html", topics: topics)
   end
@@ -18,10 +18,11 @@ defmodule Discuss.TopicController do
     changeset = Topic.changeset(%Topic{}, topic)
 
     case Repo.insert(changeset) do
-      {:ok, _post } ->
+      {:ok, _topic} ->
         conn
         |> put_flash(:info, "Topic successfully created")
-        |> redirect( to: topic_path(conn, :index) )
+        |> redirect(to: topic_path(conn, :index))
+
       {:error, changeset} ->
         conn
         |> put_flash(:error, "Topic not created")
@@ -33,7 +34,23 @@ defmodule Discuss.TopicController do
     topic = Repo.get(Topic, topic_id)
     changeset = Topic.changeset(topic)
 
-    render conn, "edit.html", changeset: changeset, topic: topic
+    render(conn, "edit.html", changeset: changeset, topic: topic)
   end
 
+  def update(conn, %{"id" => topic_id, "topic" => topic}) do
+    changeset =
+      Repo.get(Topic, topic_id)
+      |> Topic.changeset(topic)
+
+    case Repo.update(changeset) do
+      {:ok, _topic} -> 
+        conn 
+        |> put_flash(:info, "Topic successfully updated")
+        |> redirect(to: topic_path(conn, :index))
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "Topic not created")
+        |> render("edit.html", changeset: changeset, topic: Repo.get(Topic, topic_id))
+    end
+  end
 end
