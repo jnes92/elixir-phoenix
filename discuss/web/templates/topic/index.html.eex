@@ -8,11 +8,11 @@
                 <%= link "Edit", to: topic_path(@conn, :edit, topic), class: ""  %>
             </div>
         </li>
-    <%= end %>
+    <% end %>
 </ul>
 
 <div class="fixed-action-btn">
     <%= link to: topic_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light red" do %>
         <i class="material-icons">add</i>
-    <%= end %>
+    <% end %>
 </div>
