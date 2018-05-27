@@ -5,7 +5,7 @@ defmodule Discuss.CommentsChannel do
   def join("comments:" <> topic_id, _params, socket) do
     topic_id = String.to_integer(topic_id)
 
-    topic = Topic |> Repo.get(topic_id) |> Repo.preload(:comments)
+    topic = Topic |> Repo.get(topic_id) |> Repo.preload(comments: [:user])
 
     {:ok, %{comments: topic.comments}, assign(socket, :topic, topic)}
   end

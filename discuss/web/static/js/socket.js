@@ -9,6 +9,7 @@ const createSocket = (topicId) => {
   channel.join()
     .receive("ok", resp => {
       renderComments(resp.comments);
+      console.log(resp);
     })
     .receive("error", resp => { console.log("Unable to join", resp) });
 
