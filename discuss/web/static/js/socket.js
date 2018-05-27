@@ -23,7 +23,7 @@ const createSocket = (topicId) => {
   })
 }
 
-const renderComment = ({comment}) => {
+const renderComment = ({ comment }) => {
   const renderedComment = renderCommentTemplate(comment);
 
   document.querySelector('.collection').innerHTML += renderedComment;
@@ -37,9 +37,12 @@ const renderComments = (comments) => {
   document.querySelector('.collection').innerHTML = renderedComments.join(' ');
 }
 const renderCommentTemplate = (comment) => {
+  let email = (comment.user) ? comment.user.email : 'Anonymous';
+
   return `
   <li class="collection-item">
     ${comment.content}
+    <div class="secondary-content">${email}</div>
   </li>
 `;
 }
